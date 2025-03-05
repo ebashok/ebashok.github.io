@@ -64,6 +64,8 @@
         <textarea id="input" placeholder="Enter text to encode or Base64 string to decode..."></textarea><br>
         <button class="btn-encode" onclick="encodeBase64()">Encode</button>
         <button class="btn-decode" onclick="decodeBase64()">Decode</button>
+                <button class="btn-copy" onclick="copyToClipboard()">Copy to Clipboard</button>
+
         <div id="output" class="output-box"></div>
     </div>
 
@@ -85,6 +87,16 @@
                 document.getElementById("output").innerHTML = `<strong>Decoded Output:</strong><br>${decoded}`;
             } catch (error) {
                 document.getElementById("output").innerHTML = `<strong style="color: red;">Invalid Base64 string!</strong>`;
+            }
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById("output").innerText;
+            if (output) {
+                navigator.clipboard.writeText(output.replace(/^(Encoded|Decoded) Output:\n/, ''));
+                alert('Copied to clipboard!');
+            } else {
+                alert('Nothing to copy!');
             }
         }
     </script>
